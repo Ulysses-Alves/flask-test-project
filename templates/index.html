@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Flask</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="center">
+
+    <div class="circle">
+        <div class="circle-text">{{current_weekday}}<br>{{current_date}}</div>
+    </div>
+
+    <!-- <div class="t">
+        <h3>Title</h3>
+        <p>TextBox</p>
+        <p>button</p>
+        <p>button</p>
+    </div> -->
+    
+    <div class="main-content">
+
+        <div id="date-selector">
+            <!-- list 6 days, but add a plus for selecting a date -->
+        </div>
+    
+        <div id="things-to-do">
+    
+        </div>
+    
+        <div id="things-completed">
+            <!-- clear completed -->
+            
+        </div>
+
+    </div>
+    
+</body>
+<script src="{{url_for('static', filename='js/dateScript.js')}}"></script>
+</html>
