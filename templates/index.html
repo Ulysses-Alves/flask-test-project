@@ -32,34 +32,33 @@
         <div id="things-to-do">
              <div class="section-title flex-row space-bet task">
                 <p class="">Incomplete Tasks</p>
-                <img src="{{ url_for('static', filename='img/bxs-edit-alt.svg')}}" alt="add new task button">
+                <button class="btn" onclick="isInputActive()" type="button"><img src="{{ url_for('static', filename='img/bxs-edit-alt.svg')}}" alt="add new task button"></button>
              </div>
-             <div class="task flex-row space-bet">
-                <p>Finish building project</p>
-                <img src="{{ url_for('static', filename='img/bx-radio-circle.svg')}}" alt="complete task radio button">
+             <div id="current-task-container">
+                 <div class="task flex-row space-bet">
+                    <p>Make database</p>
+                   <button class="btn" onclick="setAsComplete()" type="button"> <img src="{{ url_for('static', filename='img/bx-radio-circle.svg')}}" alt="complete task radio button"></button>
+                 </div>
+                 <hr>
              </div>
-             <hr>
-             <div class="task flex-row space-bet">
-                <p>Make database</p>
-                <img src="{{ url_for('static', filename='img/bx-radio-circle.svg')}}" alt="complete task radio button">
-             </div>
-             <hr>
         </div>
         <div id="things-completed">
              <div class="section-title flex-row space-bet">
                 <p class="">Completed Tasks</p>
                 <img src="{{ url_for('static', filename='img/bxs-edit-alt.svg')}}" alt="add new task button">
              </div>
-             <div class="task flex-row space-bet">
-                <p>commit to git without a .gitignore</p>
-                <img src="{{ url_for('static', filename='img/bx-radio-circle-marked.svg')}}" alt="complete task radio button">
+             <div id="completed-task-container">
+                <div class="task flex-row space-bet">
+                    <p>commit to git without a .gitignore</p>
+                    <img src="{{ url_for('static', filename='img/bx-radio-circle-marked.svg')}}" alt="complete task radio button">
+                 </div>
+                 <hr>
+                 <div class="task flex-row space-bet">
+                    <p>feel like an idiot</p>
+                    <img src="{{ url_for('static', filename='img/bx-radio-circle-marked.svg')}}" alt="complete task radio button">
+                 </div>
+                 <hr>
              </div>
-             <hr>
-             <div class="task flex-row space-bet">
-                <p>feel like an idiot</p>
-                <img src="{{ url_for('static', filename='img/bx-radio-circle-marked.svg')}}" alt="complete task radio button">
-             </div>
-             <hr>
         </div>
     </div>
     
@@ -72,5 +71,6 @@
     </div>
 
 </body>
-<script src="{{url_for('static', filename='js/dateScript.js')}}"></script>
+<script src="{{url_for('static', filename='js/date-script.js')}}"></script>
+<script src="{{url_for('static', filename='js/button-script.js')}}"></script>
 </html>

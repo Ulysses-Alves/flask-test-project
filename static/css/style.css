@@ -4,6 +4,7 @@ body{
     margin: 0;
     padding: 0;
     display: block;
+    font-family: monospace;
 }
 
 hr{
@@ -16,12 +17,17 @@ p{
 
 #main-panel{
     width: 30vw;
-    height: 85vh;
+    height: 99vh;
 }
 
 #second-panel{
     width: 30vw;
-    height: 85vh;
+    height: 99vh;
+}
+
+#task-container{
+    max-height: 35vh;
+    overflow-y: scroll;
 }
 
 #date-selector{
@@ -51,6 +57,25 @@ p{
 
 .task{
     font-size: large;
+}
+
+.task-input{
+    font-size: large;
+}
+
+.task-input input{
+    width: 85%;
+    padding: 0.5rem;
+    font-size: large;
+}
+
+.btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
 }
 
 .section-title{
