@@ -1,0 +1,126 @@
+body{
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+hr{
+    margin: 0;
+}
+
+p{
+    margin: 0.5rem;
+}
+
+#main-panel{
+    width: 30vw;
+    height: 85vh;
+}
+
+#second-panel{
+    width: 30vw;
+    height: 85vh;
+}
+
+#date-selector{
+    width: 100%;
+}
+
+#things-to-do{
+    background-color: white;
+    text-align: start;
+    height: 50%;
+    padding: 1rem;
+}
+
+#things-completed{
+    height: 50%;
+    padding: 1rem;
+}
+
+#notes-area{
+    resize: none;
+    width: 90%;
+    height: 90%;
+    margin: 0.2rem;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.task{
+    font-size: large;
+}
+
+.section-title{
+    font-size: x-large;
+    width: 100%;
+}
+
+.border{
+    border: 2px solid black;
+}
+
+.center {
+    margin: auto;
+    width: 85vw;
+}
+
+.center-text{
+    text-align: center;
+}
+
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.align-center{
+    align-items: center;
+}
+
+.space-bet{
+    justify-content: space-between;
+}
+
+.space-around{
+    justify-content: space-around;
+}
+
+.t{
+    width: 30vw;
+    height: 90vh;
+}
+
+.circle{
+    position: relative;
+    width: 25%;
+    border-radius: 50%;
+    background-color: black;
+    max-width: 70px;
+    margin: 0.5rem;
+}
+.circle::after{
+    content:"";
+    display: block;
+    padding-bottom: 100%;
+}
+
+.circle-text{
+    position: absolute;
+    color: white;
+    font-size: larger;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

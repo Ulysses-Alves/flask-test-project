@@ -4,38 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo Flask</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body class="center">
-
-    <div class="circle">
-        <div class="circle-text">{{current_weekday}}<br>{{current_date}}</div>
-    </div>
-
-    <!-- <div class="t">
-        <h3>Title</h3>
-        <p>TextBox</p>
-        <p>button</p>
-        <p>button</p>
-    </div> -->
+<body class="center center-text flex-row space-around">
     
-    <div class="main-content">
-
-        <div id="date-selector">
-            <!-- list 6 days, but add a plus for selecting a date -->
+    <div id="main-panel" class="flex-column border">
+        <div id="date-selector" class="flex-row">
+            <div class="circle">
+                <div class="circle-text">{{current_weekday_ab}}<br>{{current_date}}</div>
+            </div>
+            <div class="circle">
+                <div class="circle-text">{{current_weekday_ab}}<br>{{current_date}}</div>
+            </div>
+            <div class="circle">
+                <div class="circle-text">{{current_weekday_ab}}<br>{{current_date}}</div>
+            </div>
+            <div class="circle">
+                <div class="circle-text">{{current_weekday_ab}}<br>{{current_date}}</div>
+            </div>
+            <div class="circle">
+                <div class="circle-text">{{current_weekday_ab}}<br>{{current_date}}</div>
+            </div>
+            <div class="circle">
+                <div class="circle-text">{{current_weekday_ab}}<br>{{current_date}}</div>
+            </div>
         </div>
-    
         <div id="things-to-do">
-    
+             <div class="section-title flex-row space-bet task">
+                <p class="">Incomplete Tasks</p>
+                <img src="{{ url_for('static', filename='img/bxs-edit-alt.svg')}}" alt="add new task button">
+             </div>
+             <div class="task flex-row space-bet">
+                <p>Finish building project</p>
+                <img src="{{ url_for('static', filename='img/bx-radio-circle.svg')}}" alt="complete task radio button">
+             </div>
+             <hr>
+             <div class="task flex-row space-bet">
+                <p>Make database</p>
+                <img src="{{ url_for('static', filename='img/bx-radio-circle.svg')}}" alt="complete task radio button">
+             </div>
+             <hr>
         </div>
-    
         <div id="things-completed">
-            <!-- clear completed -->
-            
+             <div class="section-title flex-row space-bet">
+                <p class="">Completed Tasks</p>
+                <img src="{{ url_for('static', filename='img/bxs-edit-alt.svg')}}" alt="add new task button">
+             </div>
+             <div class="task flex-row space-bet">
+                <p>commit to git without a .gitignore</p>
+                <img src="{{ url_for('static', filename='img/bx-radio-circle-marked.svg')}}" alt="complete task radio button">
+             </div>
+             <hr>
+             <div class="task flex-row space-bet">
+                <p>feel like an idiot</p>
+                <img src="{{ url_for('static', filename='img/bx-radio-circle-marked.svg')}}" alt="complete task radio button">
+             </div>
+             <hr>
         </div>
-
     </div>
     
+    <div id="second-panel" class="flex-column align-center">
+        <div class="center-text section-title border">
+            <p class="title-background">{{current_weekday}} {{current_date}}</p>
+            <p class="section-title">Notes</p>
+         </div>
+            <textarea id="notes-area" type="text">The project you're building has a fairly small font on the notes section, it might look nice, but add an option for making it bigger.</textarea>
+    </div>
+
 </body>
 <script src="{{url_for('static', filename='js/dateScript.js')}}"></script>
 </html>
