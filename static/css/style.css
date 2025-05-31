@@ -15,12 +15,17 @@ p{
     margin: 0.5rem;
 }
 
-#main-panel{
+#tasks-panel{
     width: 30vw;
     height: 99vh;
 }
 
-#second-panel{
+#notes-panel{
+    width: 30vw;
+    height: 99vh;
+}
+
+#calendar-panel{
     width: 30vw;
     height: 99vh;
 }
@@ -92,6 +97,10 @@ p{
     width: 85vw;
 }
 
+.fill-width{
+    width: 100%;
+}
+
 .center-text{
     text-align: center;
 }
@@ -106,6 +115,10 @@ p{
     flex-direction: row;
 }
 
+.wrap{
+    flex-wrap: wrap;
+}
+
 .align-center{
     align-items: center;
 }
@@ -118,6 +131,10 @@ p{
     justify-content: space-around;
 }
 
+.just-center{
+    justify-content: center;
+}
+
 .t{
     width: 30vw;
     height: 90vh;
@@ -127,9 +144,10 @@ p{
     position: relative;
     width: 25%;
     border-radius: 50%;
-    background-color: black;
+    background-color: white;
     max-width: 70px;
     margin: 0.5rem;
+    border: 2px solid black;
 }
 .circle::after{
     content:"";
@@ -139,7 +157,7 @@ p{
 
 .circle-text{
     position: absolute;
-    color: white;
+    color: black;
     font-size: larger;
     width: 100%;
     height: 100%;

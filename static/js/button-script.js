@@ -39,4 +39,12 @@ function saveTask(task){
 }
 
 function setAsComplete(){
+    //ask for confirmation, move date.
+}
+
+function openMonthPanel(){
+}
+
+function getDateToDo(){
+    // need to get incomplete task, completed tasks
 }

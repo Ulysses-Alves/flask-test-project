@@ -8,26 +8,8 @@
 </head>
 <body class="center center-text flex-row space-around">
     
-    <div id="main-panel" class="flex-column border">
-        <div id="date-selector" class="flex-row">
-            <!-- <div class="circle">
-                <div class="circle-text">{{current_weekday_ab}}<br>{{current_date}}</div>
-            </div>
-            <div class="circle">
-                <div class="circle-text">{{current_weekday_ab}}<br>{{current_date}}</div>
-            </div>
-            <div class="circle">
-                <div class="circle-text">{{current_weekday_ab}}<br>{{current_date}}</div>
-            </div>
-            <div class="circle">
-                <div class="circle-text">{{current_weekday_ab}}<br>{{current_date}}</div>
-            </div>
-            <div class="circle">
-                <div class="circle-text">{{current_weekday_ab}}<br>{{current_date}}</div>
-            </div>
-            <div class="circle">
-                <div class="circle-text">{{current_weekday_ab}}<br>{{current_date}}</div>
-            </div> -->
+    <div id="tasks-panel" class="flex-column border">
+        <div id="date-selector" class="flex-row space-around">
         </div>
         <div id="things-to-do">
              <div class="section-title flex-row space-bet task">
@@ -35,11 +17,6 @@
                 <button class="btn" onclick="isInputActive()" type="button"><img src="{{ url_for('static', filename='img/bxs-edit-alt.svg')}}" alt="add new task button"></button>
              </div>
              <div id="current-task-container">
-                 <div class="task flex-row space-bet">
-                    <p>Make database</p>
-                   <button class="btn" onclick="setAsComplete()" type="button"> <img src="{{ url_for('static', filename='img/bx-radio-circle.svg')}}" alt="complete task radio button"></button>
-                 </div>
-                 <hr>
              </div>
         </div>
         <div id="things-completed">
@@ -62,7 +39,7 @@
         </div>
     </div>
     
-    <div id="second-panel" class="flex-column align-center">
+    <div id="notes-panel" class="flex-column align-center">
         <div class="center-text section-title border">
             <p class="title-background">{{current_weekday}} {{current_date}}</p>
             <p class="section-title">Notes</p>
@@ -70,12 +47,21 @@
             <textarea id="notes-area" type="text">When clicking on a date, open second panel with the date selected.</textarea>
     </div>
 
+    <div id="calendar-panel" class="flex-column">
+        <div class="section-title border">
+            <p class="title-background">{{current_month}}</p>
+        </div>
+        <div id="calendar-container" class="border flex-row wrap just-center">
+
+        </div>
+    </div>
+
 </body>   
 
 <script>
-    const weekDay = {{ current_weekday|tojson }}
-    const weekDayAb = {{ current_weekday_ab|tojson }}
-    const currentDate = {{ current_date|tojson }}
+    const weekDay = {{ current_weekday|tojson }};
+    const weekDayAb = {{ current_weekday_ab|tojson }};
+    const currentDate = {{ current_date|tojson }};
 </script>
 <script src="{{url_for('static', filename='js/date-script.js')}}"></script>
 <script src="{{url_for('static', filename='js/button-script.js')}}"></script>
