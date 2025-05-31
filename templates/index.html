@@ -10,7 +10,7 @@
     
     <div id="main-panel" class="flex-column border">
         <div id="date-selector" class="flex-row">
-            <div class="circle">
+            <!-- <div class="circle">
                 <div class="circle-text">{{current_weekday_ab}}<br>{{current_date}}</div>
             </div>
             <div class="circle">
@@ -27,7 +27,7 @@
             </div>
             <div class="circle">
                 <div class="circle-text">{{current_weekday_ab}}<br>{{current_date}}</div>
-            </div>
+            </div> -->
         </div>
         <div id="things-to-do">
              <div class="section-title flex-row space-bet task">
@@ -67,10 +67,16 @@
             <p class="title-background">{{current_weekday}} {{current_date}}</p>
             <p class="section-title">Notes</p>
          </div>
-            <textarea id="notes-area" type="text">The project you're building has a fairly small font on the notes section, it might look nice, but add an option for making it bigger.</textarea>
+            <textarea id="notes-area" type="text">When clicking on a date, open second panel with the date selected.</textarea>
     </div>
 
-</body>
+</body>   
+
+<script>
+    const weekDay = {{ current_weekday|tojson }}
+    const weekDayAb = {{ current_weekday_ab|tojson }}
+    const currentDate = {{ current_date|tojson }}
+</script>
 <script src="{{url_for('static', filename='js/date-script.js')}}"></script>
 <script src="{{url_for('static', filename='js/button-script.js')}}"></script>
 </html>
