@@ -2,15 +2,16 @@
 const baseDate = currentDate;
 const nextDates = [];
 const weekDays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"];
-const months = []
-const dayAmount = 5;
+const selectorDays = 5;
+const dateAmount = 19;
+const calendarStart = 5;
 
 const selector = document.getElementById("date-selector");
 const calendar = document.getElementById("calendar-container");
 
 document.addEventListener("DOMContentLoaded", () => {
-    addDatesToSelector()
-    loadCalendar()
+    addDatesToSelector();
+    loadCalendar();
 });
 
     //look into progressive mutation of this code
@@ -20,15 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function addDatesToSelector(){
 
-    for(let i = 0; i < dayAmount; i++){
+    for(let i = 0; i < dateAmount; i++){
         const date = new Date(baseDate);
         date.setDate(date.getDate()+i);
         nextDates.push(date);
     }
 
-    for(let i = 0; i < dayAmount; i++){
-        console.log(nextDates[i]);
-        console.log(nextDates[i].getMonth());
+    for(let i = 0; i < selectorDays; i++){
         selector.innerHTML += `
         <div class="circle">
                 <button class="btn" onclick="getDateToDo()" type="button"><div class="circle-text">${weekDays[nextDates[i].getDay()]}<br>${nextDates[i].getDate() + "/" + (nextDates[i].getMonth() + 1)}</div></button>
@@ -41,10 +40,9 @@ function addDatesToSelector(){
             </div>
         `;
 }
-//sunday based calendar, rather than fixed amount.
-//check what today is, is sunday? if not find previous sunday, start calendar from that sunday. go for four sundays?
+
 function loadCalendar(){
-    for(let i = 0; i < dayAmount; i++){
+    for(let i = calendarStart; i < dateAmount; i++){
         calendar.innerHTML += `
         <div class="circle">
                 <button class="btn" onclick="getDateToDo()" type="button"><div class="circle-text">${weekDays[nextDates[i].getDay()]}<br>${nextDates[i].getDate() + "/" + (nextDates[i].getMonth() + 1)}</div></button>

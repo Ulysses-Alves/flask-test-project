@@ -7,9 +7,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="center center-text flex-row space-around">
+
+    <div id="notes-panel" class="flex-column align-center rm-right border">
+        <div class="center-text section-title rm-top rm-left rm-right border">
+            <p class="title-background">{{current_weekday}} {{current_date}}</p>
+            <p class="section-title">Notes</p>
+         </div>
+            <textarea id="notes-area" type="text">Previous task continue, but dates are removed? keep track of days past?</textarea>
+    </div>
     
     <div id="tasks-panel" class="flex-column border">
-        <div id="date-selector" class="flex-row space-around">
+        <div id="date-selector" class="flex-row space-around rm-left rm-right rm-top border">
         </div>
         <div id="things-to-do">
              <div class="section-title flex-row space-bet task">
@@ -38,20 +46,12 @@
              </div>
         </div>
     </div>
-    
-    <div id="notes-panel" class="flex-column align-center">
-        <div class="center-text section-title border">
-            <p class="title-background">{{current_weekday}} {{current_date}}</p>
-            <p class="section-title">Notes</p>
-         </div>
-            <textarea id="notes-area" type="text">When clicking on a date, open second panel with the date selected.</textarea>
-    </div>
 
     <div id="calendar-panel" class="flex-column">
-        <div class="section-title border">
-            <p class="title-background">{{current_month}}</p>
+        <div class="section-title rm-left border">
+            <p class="title-background">Calendar</p>
         </div>
-        <div id="calendar-container" class="border flex-row wrap just-center">
+        <div id="calendar-container" class="rm-left rm-top border flex-row wrap just-center">
 
         </div>
     </div>
@@ -63,6 +63,7 @@
     const weekDayAb = {{ current_weekday_ab|tojson }};
     const currentDate = {{ current_date|tojson }};
 </script>
+<script src="{{url_for('static', filename='js/db.js')}}"></script>
 <script src="{{url_for('static', filename='js/date-script.js')}}"></script>
 <script src="{{url_for('static', filename='js/button-script.js')}}"></script>
 </html>
