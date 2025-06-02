@@ -1,9 +1,17 @@
 let db;
-
-const openRequest = window.indexedDB.open("userTasks", 1);
+const openRequest = window.indexedDB.open("userTasks", 2);
 
 openRequest.onupgradeneeded = (event) => {
-    console.log("Upgrade")
+
+    db = event.target.result;
+
+    //Storing tasks
+    const tasksStore = db.createObjectStore("tasks", {keyPath:"id", autoIncrement: true});
+
+    tasksStore.createIndex("task", "task", {unique: false});
+    tasksStore.createIndex("isComplete","isComplete", {unique: false});
+    tasksStore.createIndex("creation_date","creation_date", {unique: false});
+    tasksStore.createIndex("note","note", {unique:false});
 };
 
 openRequest.onerror = (event) => {
@@ -11,14 +19,9 @@ openRequest.onerror = (event) => {
 };
 
 openRequest.onsuccess = (event) => {
-    console.log("Success")
-    db = openRequest.result;
+    db = event.target.result;
 };
 
-const tasksStore = db.createObjectStore("tasks", {keyPath:"taskTitle",});
-
-tasksStore.createIndex("creation_d","creation_d", {unique: false});
-tasksStore.createIndex("creation_m","creation_m", {unique: false});
-tasksStore.createIndex("creation_y","creation_y", {unique: false});
-tasksStore.createIndex("isComplete","isComplete", {unique: false});
-tasksStore.createIndex("","", {unique: false});
+//get tasks that have the following date, separate them by completion status
+//if selected date is newer move, task forward how? if date is equal or less than? 
+// if day or month or year is less than current it's older

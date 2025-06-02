@@ -27,8 +27,25 @@ function addNewTask() {
 function saveTask(task){
     const parent = task.parentElement;
     const input = parent.querySelector("input");
-    parent.remove();
-    activeInput = false;
+    const currentSelection = document.querySelector('[data-status="selected"]');
+
+    const noteTx = db.transaction("notes", "readwrite");
+    const noteStore = noteTx.objectStore("notes");
+
+    const taskTx = db.transaction("tasks","readwrite");
+    const taskStore = taskTx.objectStore("tasks");
+
+    const request = taskStore.add({
+        task: input.value,
+        isComplete: false,
+        creation_date: currentSelection.firstElementChild.dataset.date,
+        note: ""
+    });
+
+    request.onsuccess = function(event) {
+
+        parent.remove();
+        activeInput = false;
     currentTaskContainer.innerHTML += `
    <div class="task flex-row space-bet">
                     <p>${input.value}</p>
@@ -36,6 +53,7 @@ function saveTask(task){
                  </div>
                  <hr>`;
     taskCount = taskCount + 1;
+    }
 }
 
 function setAsComplete(){
@@ -43,8 +61,50 @@ function setAsComplete(){
 }
 
 function openMonthPanel(){
+    
 }
 
-function getDateToDo(){
-    // need to get incomplete task, completed tasks
+function getDateToDo(element){
+
+    let currentSelection = document.querySelector('[data-status="selected"]');
+
+    if(element.parentElement.dataset.status == currentSelection.dataset.status){
+        console.log("Same");
+    }
+    else{
+
+        element.parentElement.dataset.status = "selected";
+        element.firstElementChild.dataset.status = "selected";
+
+        currentSelection.dataset.status = "unselected";
+        currentSelection.firstElementChild.firstElementChild.dataset.status = "unselected";
+
+    }
+
+    //get values from database
+
+    const taskStore = db.transaction("tasks", "readonly");
+
+    let tasks = taskStore.objectStore("tasks");
+    let taskIndex = tasks.index("creation_date");
+
+    selectedDate = element.dataset.date;
+
+    let tasksRequest = taskIndex.getAll(IDBKeyRange.only(selectedDate)); //get all that are equal or older the element data-date
+
+    tasksRequest.onsuccess = function () {
+        const results = tasksRequest.result;
+
+        results.forEach( task => {
+            currentTaskContainer.innerHTML += `
+   <div class="task flex-row space-bet">
+                    <p>${task.task}</p>
+                   <button class="btn" onclick="setAsComplete()" type="button"> <img src="/static/img/bx-radio-circle.svg" alt="complete task radio button"></button>
+                 </div>
+                 <hr>`;
+        })
+
+        console.log("Tasks for selected date:", results);
+      };
+
 }
