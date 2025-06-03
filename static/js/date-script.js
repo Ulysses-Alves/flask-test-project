@@ -12,6 +12,7 @@ const calendar = document.getElementById("calendar-container");
 document.addEventListener("DOMContentLoaded", () => {
     addDatesToSelector();
     loadCalendar();
+    loadCurrentTasks();
 });
 
     //look into progressive mutation of this code
@@ -55,5 +56,35 @@ function loadCalendar(){
                 <button class="btn" onclick="getDateToDo(this)" type="button" data-date="${nextDates[i].toISOString()}"><div class="circle-text" data-status="unselected">${weekDays[nextDates[i].getDay()]}<br>${nextDates[i].getDate() + "/" + (nextDates[i].getMonth() + 1)}</div></button>
             </div>
         `;
+    }
+}
+
+async function loadCurrentTasks(){
+
+    if(!db) { await loadDb();}
+
+    const taskStore = db.transaction("tasks", "readonly");
+
+    let tasks = taskStore.objectStore("tasks");
+    let taskIndex = tasks.index("creation_date");
+    
+    defaultDate = document.querySelector('[data-status="selected"]');
+    
+    let tasksRequest = taskIndex.getAll(IDBKeyRange.only(defaultDate.firstElementChild.dataset.date)); //get all that are equal or older the element data-date
+    
+    tasksRequest.onsuccess = function () {
+        const results = tasksRequest.result;
+
+        results.forEach( task => {
+            currentTaskContainer.innerHTML += `
+        <div class="task flex-row space-bet">
+                <p>${task.task}</p>
+                <div>
+                <button class="btn" onclick="openNote(this)" type="button"> <img src="/static/img/bx-notepad.svg" alt="open task notes"></button>
+                <button class="btn" onclick="setAsComplete()" type="button"> <img src="/static/img/bx-radio-circle.svg" alt="complete task radio button"></button>
+                </div>
+            </div>
+            <hr>`;
+        })
     }
 }

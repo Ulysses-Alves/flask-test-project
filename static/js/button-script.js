@@ -1,6 +1,7 @@
 
 const currentTaskContainer = document.getElementById("current-task-container");
 const completedTaskContainer = document.getElementById("completed-task-container");
+const taskNoteArea = document.getElementById("notes-area")
 
 var taskCount = 0;
 var activeInput = false;
@@ -15,6 +16,7 @@ function isInputActive(){
 }
 
 function addNewTask() {
+
     activeInput = true;
     currentTaskContainer.innerHTML += `
     <div id="task-${taskCount}" class="task-input flex-row space-bet">
@@ -24,7 +26,9 @@ function addNewTask() {
     taskCount = taskCount + 1;
 }
 
-function saveTask(task){
+async function saveTask(task){
+    if(!db) { await loadDb();}
+
     const parent = task.parentElement;
     const input = parent.querySelector("input");
     const currentSelection = document.querySelector('[data-status="selected"]');
@@ -64,8 +68,8 @@ function openMonthPanel(){
     
 }
 
-function getDateToDo(element){
-
+async function getDateToDo(element){
+    if(!db) { await loadDb();}
     let currentSelection = document.querySelector('[data-status="selected"]');
 
     if(element.parentElement.dataset.status == currentSelection.dataset.status){
@@ -99,7 +103,10 @@ function getDateToDo(element){
             currentTaskContainer.innerHTML += `
    <div class="task flex-row space-bet">
                     <p>${task.task}</p>
+                    <div>
+                     <button class="btn" onclick="openNote(this)" type="button"> <img src="/static/img/bx-notepad.svg" alt="open task notes"></button>
                    <button class="btn" onclick="setAsComplete()" type="button"> <img src="/static/img/bx-radio-circle.svg" alt="complete task radio button"></button>
+                    </div>
                  </div>
                  <hr>`;
         })
