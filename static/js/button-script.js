@@ -26,6 +26,14 @@ function addNewTask() {
     taskCount = taskCount + 1;
 }
 
+function deleteMode(){
+    
+}
+
+async function deleteTask(){
+
+}
+
 async function saveTask(task){
     if(!db) { await loadDb();}
 
@@ -47,13 +55,17 @@ async function saveTask(task){
     });
 
     request.onsuccess = function(event) {
-
+        
         parent.remove();
         activeInput = false;
+
     currentTaskContainer.innerHTML += `
-   <div class="task flex-row space-bet">
+   <div data-id="${event.target.result}" class="task flex-row space-bet">
                     <p>${input.value}</p>
+                   <div>
+                    <button class="btn" onclick="openNote(this)" type="button"> <img src="/static/img/bx-notepad.svg" alt="open task notes"></button>
                    <button class="btn" onclick="setAsComplete()" type="button"> <img src="/static/img/bx-radio-circle.svg" alt="complete task radio button"></button>
+                   </div>
                  </div>
                  <hr>`;
     taskCount = taskCount + 1;
@@ -82,10 +94,7 @@ async function getDateToDo(element){
 
         currentSelection.dataset.status = "unselected";
         currentSelection.firstElementChild.firstElementChild.dataset.status = "unselected";
-
     }
-
-    //get values from database
 
     const taskStore = db.transaction("tasks", "readonly");
 
@@ -94,11 +103,10 @@ async function getDateToDo(element){
 
     selectedDate = element.dataset.date;
 
-    let tasksRequest = taskIndex.getAll(IDBKeyRange.only(selectedDate)); //get all that are equal or older the element data-date
-
+    let tasksRequest = taskIndex.getAll(IDBKeyRange.upperBound(selectedDate));
     tasksRequest.onsuccess = function () {
         const results = tasksRequest.result;
-
+        currentTaskContainer.innerHTML = "";
         results.forEach( task => {
             currentTaskContainer.innerHTML += `
    <div class="task flex-row space-bet">
@@ -110,8 +118,6 @@ async function getDateToDo(element){
                  </div>
                  <hr>`;
         })
-
-        console.log("Tasks for selected date:", results);
       };
 
 }

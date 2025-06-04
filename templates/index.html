@@ -22,7 +22,10 @@
         <div id="things-to-do">
              <div class="section-title flex-row space-bet task">
                 <p class="">Incomplete Tasks</p>
+                <div>
+                    <button class="btn" onclick="deletionMode()" type="button"><img src="{{ url_for('static', filename='img/bxs-edit-alt.svg')}}" alt="add new task button"></button>
                 <button class="btn" onclick="isInputActive()" type="button"><img src="{{ url_for('static', filename='img/bxs-edit-alt.svg')}}" alt="add new task button"></button>
+                </div>
              </div>
              <div id="current-task-container">
              </div>

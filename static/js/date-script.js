@@ -70,14 +70,14 @@ async function loadCurrentTasks(){
     
     defaultDate = document.querySelector('[data-status="selected"]');
     
-    let tasksRequest = taskIndex.getAll(IDBKeyRange.only(defaultDate.firstElementChild.dataset.date)); //get all that are equal or older the element data-date
+    let tasksRequest = taskIndex.getAll(IDBKeyRange.upperBound(defaultDate.firstElementChild.dataset.date)); //get all that are equal or older the element data-date
     
     tasksRequest.onsuccess = function () {
         const results = tasksRequest.result;
 
         results.forEach( task => {
             currentTaskContainer.innerHTML += `
-        <div class="task flex-row space-bet">
+        <div data-id="${task.id}" class="task flex-row space-bet">
                 <p>${task.task}</p>
                 <div>
                 <button class="btn" onclick="openNote(this)" type="button"> <img src="/static/img/bx-notepad.svg" alt="open task notes"></button>
