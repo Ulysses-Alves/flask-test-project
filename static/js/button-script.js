@@ -27,10 +27,31 @@ function addNewTask() {
 }
 
 function deleteMode(){
+
+    // const tasks = document.querySelectorAll(".task");
+
+    const buttonContainer = document.querySelectorAll(".task-buttons");
+
+    buttonContainer.forEach( container =>{
+        container.innerHTML = `
+        <button class="btn" onclick="deleteTask()" type="button"> <img src="/static/img/bx-trash.svg" alt="delete task"></button>
+    `
+    } )
     
 }
 
-async function deleteTask(){
+async function deleteTask(task){
+
+    if(!db) { await loadDb();}
+
+    const mainParent = task.parentElement.parentElement;
+    const input = mainParent.querySelector("input");
+    const currentSelection = document.querySelector('[data-status="selected"]');
+
+    const taskTx = db.transaction("tasks","readwrite");
+    const taskStore = taskTx.objectStore("tasks");
+
+    const request = taskStore.delete(mainParent.dataset.id);
 
 }
 
@@ -40,9 +61,6 @@ async function saveTask(task){
     const parent = task.parentElement;
     const input = parent.querySelector("input");
     const currentSelection = document.querySelector('[data-status="selected"]');
-
-    const noteTx = db.transaction("notes", "readwrite");
-    const noteStore = noteTx.objectStore("notes");
 
     const taskTx = db.transaction("tasks","readwrite");
     const taskStore = taskTx.objectStore("tasks");
@@ -62,7 +80,7 @@ async function saveTask(task){
     currentTaskContainer.innerHTML += `
    <div data-id="${event.target.result}" class="task flex-row space-bet">
                     <p>${input.value}</p>
-                   <div>
+                   <div class="task-buttons">
                     <button class="btn" onclick="openNote(this)" type="button"> <img src="/static/img/bx-notepad.svg" alt="open task notes"></button>
                    <button class="btn" onclick="setAsComplete()" type="button"> <img src="/static/img/bx-radio-circle.svg" alt="complete task radio button"></button>
                    </div>
@@ -111,7 +129,7 @@ async function getDateToDo(element){
             currentTaskContainer.innerHTML += `
    <div class="task flex-row space-bet">
                     <p>${task.task}</p>
-                    <div>
+                    <div class="task-buttons">
                      <button class="btn" onclick="openNote(this)" type="button"> <img src="/static/img/bx-notepad.svg" alt="open task notes"></button>
                    <button class="btn" onclick="setAsComplete()" type="button"> <img src="/static/img/bx-radio-circle.svg" alt="complete task radio button"></button>
                     </div>
