@@ -77,14 +77,14 @@ async function loadCurrentTasks(){
 
         results.forEach( task => {
             currentTaskContainer.innerHTML += `
-        <div data-id="${task.id}" class="task flex-row space-bet">
+        <div data-id="${task.id}" class="task flex-row space-bet border rm-top rm-left rm-right">
                 <p>${task.task}</p>
                 <div class="task-buttons">
                 <button class="btn" onclick="openNote(this)" type="button"> <img src="/static/img/bx-notepad.svg" alt="open task notes"></button>
                 <button class="btn" onclick="setAsComplete()" type="button"> <img src="/static/img/bx-radio-circle.svg" alt="complete task radio button"></button>
                 </div>
             </div>
-            <hr>`;
+            `;
         })
     }
 }
